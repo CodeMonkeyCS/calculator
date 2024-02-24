@@ -10,13 +10,17 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack(alignment: .trailing) {
-            TextField("1234567890", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+            Text("1234567890")
+                .font(.largeTitle)
                 .fontWeight(Font.Weight.bold)
-                .font(Font.largeTitle)
-                .frame(maxWidth: .infinity, alignment: .center)
-                
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .id("valueOutput")
+        }
+          
+        VStack(alignment: .trailing) {
             HStack() {
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Button(action: {
+                }, label: {
                     Text("AC")
                         .font(.title)
                         .fontWeight(.bold)
