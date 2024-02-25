@@ -64,7 +64,6 @@ struct ContentView: View {
                 
                 Button(action: {
                     self.data.onOperatorClicked(.divide)
-                    self.displayText = self.data.getDisplayValue()
                 }, label: {
                     Text("/")
                         .font(.title)
@@ -110,7 +109,6 @@ struct ContentView: View {
                 
                 Button(action: {
                     self.data.onOperatorClicked(.multiply)
-                    self.displayText = self.data.getDisplayValue()
                 }, label: {
                     Text("x")
                         .font(.title)
@@ -156,7 +154,6 @@ struct ContentView: View {
                 
                 Button(action: {
                     self.data.onOperatorClicked(.minus)
-                    self.displayText = self.data.getDisplayValue()
                 }, label: {
                     Text("-")
                         .font(.title)
@@ -202,7 +199,6 @@ struct ContentView: View {
                 
                 Button(action: {
                     self.data.onOperatorClicked(.plus)
-                    self.displayText = self.data.getDisplayValue()
                 }, label: {
                     Text("+")
                         .font(.title)

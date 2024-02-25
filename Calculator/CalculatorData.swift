@@ -25,45 +25,34 @@ enum DisplayState {
     case calculatedValue
 }
 
-///
-/// \brief operator functions
-func noOperation(valueA: Double, valueB: Double) -> Double { 0.0 }
-func add(valueA: Double, valueB: Double) -> Double { valueA + valueB }
-func subtract(valueA: Double, valueB: Double) -> Double { valueA - valueB }
-func multiply(valueA: Double, valueB: Double) -> Double { valueA * valueB }
-func divide(valueA: Double, valueB: Double) -> Double { valueA / valueB }
-
 class CalculatorData {
     
-    var hasDecimal = false
-    var calculatedValue = 0.0
-    var valueA = 0.0
-    var valueB = 0.0
+    var calculatedValue = Number()
+    var valueA = Number()
+    var valueB = Number()
     var currentOperator = Operator.none
     var display = DisplayState.valueA
-    var operatorClosure: (Double, Double) -> Double
-    let operators: [(Double, Double) -> Double] = [
+    var operatorClosure: (Number, Number) -> Number
+    let operators: [(Number, Number) -> Number] = [
         add,
         subtract,
         multiply,
         divide,
     ]
     
-    init(calculatedValue: Double = 0.0, valueA: Double = 0.0, valueB: Double = 0.0, currentOperator: Operator = Operator.none, display: DisplayState = DisplayState.valueA, operatorClosure: @escaping (Double, Double) -> Double = noOperation) {
-        self.calculatedValue = calculatedValue
-        self.valueA = valueA
-        self.valueB = valueB
+    init(currentOperator: Operator = .none, display: DisplayState = .valueA, operatorClosure: @escaping (Number, Number) -> Number = noOperation) {
         self.currentOperator = currentOperator
         self.display = display
         self.operatorClosure = operatorClosure
     }
     
     func onClearClicked() {
-        self.calculatedValue = 0.0
-        self.valueA = 0.0
-        self.valueB = 0.0
+        self.calculatedValue.reset()
+        self.valueA.reset()
+        self.valueB.reset()
         self.currentOperator = .none
         self.operatorClosure = noOperation
+        self.display = .valueA
     }
     
     func onOperatorClicked(_ operate: Operator) {
@@ -75,24 +64,32 @@ class CalculatorData {
         }
         else if operate == .swapSign {
             if display == .valueA {
-                self.valueA *= -1.0
+                self.valueA.toggleSign()
             }
             else if display == .valueB {
-                self.valueB *= -1.0
+                self.valueB.toggleSign()
             }
             else {
-                self.calculatedValue *= -1.0
+                self.calculatedValue.toggleSign()
             }
         }
         else if operate == .percent {
             if display == .valueA {
-                self.valueA *= 0.01
+                self.valueA.toPercent()
             }
             else if display == .valueB {
-                self.valueB *= 0.01
+                self.valueB.toPercent()
             }
             else {
-                self.calculatedValue *= 0.01
+                self.calculatedValue.toPercent()
+            }
+        }
+        else if operate == .decimal {
+            if display == .valueA {
+                self.valueA.makeDouble()
+            }
+            else if display == .valueB {
+                self.valueB.makeDouble()
             }
         }
         else if operate == .equals {
@@ -103,38 +100,26 @@ class CalculatorData {
     func onNumberClicked(_ number: Int) {
         
         if display == .valueA {
-            self.valueA *= 10.0
-            self.valueA += Double(number)
-            print("\(self.valueA)")
+            self.valueA.addNumber(number)
         }
         else if display == .valueB {
-            self.valueB *= 10.0
-            self.valueB += Double(number)
-            print("\(self.valueB)")
+            self.valueB.addNumber(number)
         }
     }
     
     func getDisplayValue() -> String {
         
-        var value = self.calculatedValue
+        var displayValue: String
         if display == .valueA {
-            value = self.valueA
+            displayValue = valueA.toString()
         }
         else if display == .valueB {
-            value = self.valueB
+            displayValue = valueB.toString()
         }
-        return self.toDisplayString(value: value)
-    }
-    
-    func toDisplayString(value: Double) -> String {
-        
-        let remainder = value.truncatingRemainder(dividingBy: 1)
-        print(remainder)
-        if remainder >= 0.0 {
-            return "\(value)"
+        else {
+            displayValue = calculatedValue.toString()
         }
-        let wholeNumber = Int(value)
-        return "\(wholeNumber)"
+        return displayValue
     }
     
     func calculateFinalValue() {
@@ -142,7 +127,8 @@ class CalculatorData {
         display = .calculatedValue
         if self.currentOperator == .plus || self.currentOperator == .minus || self.currentOperator == .multiply || self.currentOperator == .divide {
             self.calculatedValue = self.operatorClosure(self.valueA, self.valueB)
-            print("\(self.calculatedValue)")
+            self.valueA.copy(number: self.calculatedValue)
+            self.valueB.reset()
         }
     }
 }
