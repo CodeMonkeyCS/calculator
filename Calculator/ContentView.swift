@@ -19,8 +19,7 @@ struct ContentView: View {
             Text(displayText)
                 .font(.largeTitle)
                 .fontWeight(Font.Weight.bold)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .id("valueOutput")
+                .multilineTextAlignment(.trailing)
                 .onAppear(perform: {
                     self.displayText = self.data.getDisplayValue()
                 })
@@ -38,7 +37,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
-                .id("acButton")
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onOperatorClicked(.swapSign)
@@ -50,6 +50,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onOperatorClicked(.percent)
@@ -61,6 +63,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onOperatorClicked(.divide)
@@ -71,6 +75,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
             }
             
             HStack {
@@ -84,6 +90,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onNumberClicked(8)
@@ -95,6 +103,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onNumberClicked(9)
@@ -106,6 +116,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onOperatorClicked(.multiply)
@@ -116,6 +128,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
             }
             
             HStack {
@@ -129,6 +143,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onNumberClicked(5)
@@ -140,6 +156,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onNumberClicked(6)
@@ -151,6 +169,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onOperatorClicked(.minus)
@@ -161,6 +181,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
             }
             
             HStack {
@@ -174,6 +196,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onNumberClicked(2)
@@ -185,6 +209,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onNumberClicked(3)
@@ -196,6 +222,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onOperatorClicked(.plus)
@@ -206,6 +234,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
             }
             
             HStack {
@@ -219,6 +249,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onOperatorClicked(.decimal)
@@ -229,6 +261,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
                 
                 Button(action: {
                     self.data.onOperatorClicked(.equals)
@@ -240,6 +274,8 @@ struct ContentView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.gray)
+                .controlSize(.extraLarge)
+                .cornerRadius(100)
             }
             
         }
