@@ -20,12 +20,15 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .fontWeight(Font.Weight.bold)
                 .multilineTextAlignment(.trailing)
+                .frame(width: UIScreen.main.bounds.width * 0.9, height: 150, alignment: .trailing)
+                .padding(5)
                 .onAppear(perform: {
                     self.displayText = self.data.getDisplayValue()
                 })
         }
+        .frame(width: UIScreen.main.bounds.width, height: 100, alignment: .center)
           
-        VStack(alignment: .trailing) {
+        VStack(alignment: .center) {
             HStack() {
                 Button(action: {
                     self.data.onClearClicked()
@@ -238,7 +241,7 @@ struct ContentView: View {
                 .cornerRadius(100)
             }
             
-            HStack {
+            HStack() {
                 Button(action: {
                     self.data.onNumberClicked(0)
                     self.displayText = self.data.getDisplayValue()
@@ -277,9 +280,7 @@ struct ContentView: View {
                 .controlSize(.extraLarge)
                 .cornerRadius(100)
             }
-            
         }
-        .padding()
     }
 }
 
