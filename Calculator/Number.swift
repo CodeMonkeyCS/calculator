@@ -13,12 +13,16 @@ class Number {
     var integer = 0
     var double = 0.0
     
+    ///
+    /// \brief  reset to default values
     func reset() {
         self.decimalPlace = -1
         self.integer = 0
         self.double = 0.0
     }
     
+    ///
+    /// \brief  used when building a number before an operator is selected
     func addNumber(_ value: Int) {
         
         print("\(value)")
@@ -37,6 +41,8 @@ class Number {
         }
     }
     
+    ///
+    /// \brief  toggle between positive and negative
     func toggleSign() {
         
         if isDouble() {
@@ -47,6 +53,8 @@ class Number {
         }
     }
     
+    ///
+    /// \brief  convert number to a double
     func makeDouble() {
         if !self.isDouble() {
             self.decimalPlace = 0
@@ -54,17 +62,23 @@ class Number {
         }
     }
     
+    ///
+    /// \brief  convert number to percentage
     func toPercent() {
         self.makeDouble()
         self.double *= 0.01
     }
     
+    ///
+    /// \brief  copy the number
     func copy(number: Number) {
         self.decimalPlace = number.decimalPlace
         self.integer = number.integer
         self.double = number.double
     }
     
+    ///
+    /// \brief  convert the number to a string based on type
     func toString() -> String {
         
         if isDouble() {
@@ -88,6 +102,8 @@ class Number {
 /// \brief operator functions
 func noOperation(valueA: Number, valueB: Number) -> Number { Number() }
 
+///
+/// \brief add closure operator for numbers
 func add(valueA: Number, valueB: Number) -> Number {
     let newNumber = Number()
     if valueA.isDouble() || valueB.isDouble() {
@@ -103,6 +119,8 @@ func add(valueA: Number, valueB: Number) -> Number {
     return newNumber
 }
 
+///
+/// \brief subtract closure operator for numbers
 func subtract(valueA: Number, valueB: Number) -> Number {
     let newNumber = Number()
     if valueA.isDouble() || valueB.isDouble() {
@@ -118,6 +136,8 @@ func subtract(valueA: Number, valueB: Number) -> Number {
     return newNumber
 }
 
+///
+/// \brief multiply closure operator for numbers
 func multiply(valueA: Number, valueB: Number) -> Number {
     let newNumber = Number()
     if valueA.isDouble() || valueB.isDouble() {
@@ -133,6 +153,8 @@ func multiply(valueA: Number, valueB: Number) -> Number {
     return newNumber
 }
 
+///
+/// \brief divide closure operator for numbers
 func divide(valueA: Number, valueB: Number) -> Number {
     let newNumber = Number()
     valueA.makeDouble()
