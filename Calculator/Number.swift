@@ -168,7 +168,7 @@ func divide(valueA: Number, valueB: Number) -> Number {
             newNumber.double = valueA.double / valueB.double
         }
     }
-    else {
+    else if valueB.integer != 0 {
         newNumber.integer = valueA.integer / valueB.integer
     }
     
