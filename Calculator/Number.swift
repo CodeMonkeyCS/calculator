@@ -157,11 +157,19 @@ func multiply(valueA: Number, valueB: Number) -> Number {
 /// \brief divide closure operator for numbers
 func divide(valueA: Number, valueB: Number) -> Number {
     let newNumber = Number()
-    valueA.makeDouble()
-    valueB.makeDouble()
-    newNumber.makeDouble()
-    if valueB.double != 0.0 {
-        newNumber.double = valueA.double / valueB.double
+    let numerator = valueA.isDouble() ? valueA.double : Double(valueA.integer)
+    let denominator = valueB.isDouble() ? valueB.double : Double(valueB.integer)
+    let remainder = numerator.remainder(dividingBy: denominator)
+    if remainder > 0 {
+        valueA.makeDouble()
+        valueB.makeDouble()
+        newNumber.makeDouble()
+        if valueB.double != 0.0 {
+            newNumber.double = valueA.double / valueB.double
+        }
+    }
+    else {
+        newNumber.integer = valueA.integer / valueB.integer
     }
     
     return newNumber
