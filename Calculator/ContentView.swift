@@ -39,7 +39,7 @@ struct ContentView: View {
                         .frame(width: 40.0, height: 50.0)
                 })
                 .buttonStyle(.borderedProminent)
-                .tint(.gray)
+                .tint(.orange)
                 .controlSize(.extraLarge)
                 .cornerRadius(100)
                 
@@ -53,7 +53,7 @@ struct ContentView: View {
                         .frame(width: 40.0, height: 50.0)
                 })
                 .buttonStyle(.borderedProminent)
-                .tint(.gray)
+                .tint(.orange)
                 .controlSize(.extraLarge)
                 .cornerRadius(100)
                 
@@ -67,7 +67,7 @@ struct ContentView: View {
                         .frame(width: 40.0, height: 50.0)
                 })
                 .buttonStyle(.borderedProminent)
-                .tint(.gray)
+                .tint(.orange)
                 .controlSize(.extraLarge)
                 .cornerRadius(100)
                 
@@ -80,7 +80,7 @@ struct ContentView: View {
                         .frame(width: 40.0, height: 50.0)
                 })
                 .buttonStyle(.borderedProminent)
-                .tint(.gray)
+                .tint(.teal)
                 .controlSize(.extraLarge)
                 .cornerRadius(100)
             }
@@ -137,7 +137,7 @@ struct ContentView: View {
                         .frame(width: 40.0, height: 50.0)
                 })
                 .buttonStyle(.borderedProminent)
-                .tint(.gray)
+                .tint(.teal)
                 .controlSize(.extraLarge)
                 .cornerRadius(100)
             }
@@ -194,7 +194,7 @@ struct ContentView: View {
                         .frame(width: 40.0, height: 50.0)
                 })
                 .buttonStyle(.borderedProminent)
-                .tint(.gray)
+                .tint(.teal)
                 .controlSize(.extraLarge)
                 .cornerRadius(100)
             }
@@ -251,7 +251,7 @@ struct ContentView: View {
                         .frame(width: 40.0, height: 50.0)
                 })
                 .buttonStyle(.borderedProminent)
-                .tint(.gray)
+                .tint(.teal)
                 .controlSize(.extraLarge)
                 .cornerRadius(100)
             }
@@ -294,7 +294,7 @@ struct ContentView: View {
                         .frame(width: 40.0, height: 50.0)
                 })
                 .buttonStyle(.borderedProminent)
-                .tint(.gray)
+                .tint(.teal)
                 .controlSize(.extraLarge)
                 .cornerRadius(100)
             }
