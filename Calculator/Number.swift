@@ -10,14 +10,12 @@ import Foundation
 class Number {
     
     var decimalPlace = -1
-    var integer = 0
     var double = 0.0
     
     ///
     /// \brief  reset to default values
     func reset() {
         self.decimalPlace = -1
-        self.integer = 0
         self.double = 0.0
     }
     
@@ -25,32 +23,24 @@ class Number {
     /// \brief  used when building a number before an operator is selected
     func addNumber(_ value: Int) {
         
-        print("\(value)")
+        var number = Double(value)
         if isDouble() {
-            var number = Double(value)
             for _ in 0...self.decimalPlace {
                 number /= 10.0
             }
-            print("adding \(number)")
-            self.double += number
             self.decimalPlace += 1
         }
         else {
-            self.integer *= 10
-            self.integer += value
+            self.double *= 10.0
         }
+        self.double += number
+        
     }
     
     ///
     /// \brief  toggle between positive and negative
     func toggleSign() {
-        
-        if isDouble() {
-            self.double *= -1.0
-        }
-        else {
-            self.integer *= -1
-        }
+        self.double *= -1.0
     }
     
     ///
@@ -58,7 +48,6 @@ class Number {
     func makeDouble() {
         if !self.isDouble() {
             self.decimalPlace = 0
-            self.double = Double(self.integer)
         }
     }
     
@@ -73,7 +62,6 @@ class Number {
     /// \brief  copy the number
     func copy(number: Number) {
         self.decimalPlace = number.decimalPlace
-        self.integer = number.integer
         self.double = number.double
     }
     
@@ -81,18 +69,16 @@ class Number {
     /// \brief  convert the number to a string based on type
     func toString() -> String {
         
-        if isDouble() {
-            let remainder = self.double.truncatingRemainder(dividingBy: 1)
-            if remainder == 0 {
-                var string = "0."
-                for _ in 1...self.decimalPlace {
-                    string += "0"
-                }
-                return string
+        let zeroRemainder = self.double.truncatingRemainder(dividingBy: 1)
+        if self.decimalPlace >= 1 && zeroRemainder == 0 {
+            var string = self.double.rounded().formatted() + "."
+            for _ in 1...self.decimalPlace {
+                string += "0"
             }
-            return "\(self.double)"
+            return string
         }
-        return "\(self.integer)"
+        
+        return self.double.formatted()
     }
     
     func isDouble() -> Bool { decimalPlace >= 0 }
@@ -110,11 +96,8 @@ func add(valueA: Number, valueB: Number) -> Number {
         valueA.makeDouble()
         valueB.makeDouble()
         newNumber.makeDouble()
-        newNumber.double = valueA.double + valueB.double
     }
-    else {
-        newNumber.integer = valueA.integer + valueB.integer
-    }
+    newNumber.double = valueA.double + valueB.double
     
     return newNumber
 }
@@ -127,11 +110,8 @@ func subtract(valueA: Number, valueB: Number) -> Number {
         valueA.makeDouble()
         valueB.makeDouble()
         newNumber.makeDouble()
-        newNumber.double = valueA.double - valueB.double
     }
-    else {
-        newNumber.integer = valueA.integer - valueB.integer
-    }
+    newNumber.double = valueA.double - valueB.double
     
     return newNumber
 }
@@ -144,11 +124,8 @@ func multiply(valueA: Number, valueB: Number) -> Number {
         valueA.makeDouble()
         valueB.makeDouble()
         newNumber.makeDouble()
-        newNumber.double = valueA.double * valueB.double
     }
-    else {
-        newNumber.integer = valueA.integer * valueB.integer
-    }
+    newNumber.double = valueA.double * valueB.double
     
     return newNumber
 }
@@ -157,19 +134,17 @@ func multiply(valueA: Number, valueB: Number) -> Number {
 /// \brief divide closure operator for numbers
 func divide(valueA: Number, valueB: Number) -> Number {
     let newNumber = Number()
-    let numerator = valueA.isDouble() ? valueA.double : Double(valueA.integer)
-    let denominator = valueB.isDouble() ? valueB.double : Double(valueB.integer)
+    let numerator = valueA.double
+    let denominator = valueB.double
     let remainder = numerator.remainder(dividingBy: denominator)
     if remainder > 0 {
         valueA.makeDouble()
         valueB.makeDouble()
         newNumber.makeDouble()
-        if valueB.double != 0.0 {
-            newNumber.double = valueA.double / valueB.double
-        }
     }
-    else if valueB.integer != 0 {
-        newNumber.integer = valueA.integer / valueB.integer
+    
+    if valueB.double != 0.0 {
+        newNumber.double = valueA.double / valueB.double
     }
     
     return newNumber
