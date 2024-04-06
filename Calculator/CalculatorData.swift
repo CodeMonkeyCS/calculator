@@ -25,11 +25,13 @@ enum DisplayState {
     case calculatedValue
 }
 
+enum FontSize: CGFloat {
+    case Large = 72
+    case Medium = 64
+    case Small = 56
+}
+
 class CalculatorData {
-    
-    let kLargeFontSize = 72
-    let kMeduimFontSize = 64
-    let kSmallFontSize = 56
     
     /// where the final value is stored
     var calculatedValue = Number()
@@ -47,7 +49,7 @@ class CalculatorData {
     var display = DisplayState.valueA
     
     /// current font size for the number display
-    var numberFontSize = 72
+    var numberFontSize = FontSize.Large
     
     /// closure to run on when equals is clicked
     var operatorClosure: (Number, Number) -> Number
@@ -150,13 +152,13 @@ class CalculatorData {
         
         // update font size based on display length
         if displayValue.count < 6 {
-            self.numberFontSize = kLargeFontSize
+            self.numberFontSize = .Large
         }
         else if 6...10 ~= displayValue.count {
-            self.numberFontSize = kMeduimFontSize
+            self.numberFontSize = .Medium
         }
         else {
-            self.numberFontSize = kSmallFontSize
+            self.numberFontSize = .Small
         }
         
         return displayValue
@@ -175,6 +177,6 @@ class CalculatorData {
     }
     
     func getDisplayFontSize() -> CGFloat {
-        CGFloat(self.numberFontSize)
+        self.numberFontSize.rawValue
     }
 }
