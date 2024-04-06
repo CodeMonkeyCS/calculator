@@ -27,12 +27,32 @@ enum DisplayState {
 
 class CalculatorData {
     
+    let kLargeFontSize = 72
+    let kMeduimFontSize = 64
+    let kSmallFontSize = 56
+    
+    /// where the final value is stored
     var calculatedValue = Number()
+    
+    /// left hand value for math operations
     var valueA = Number()
+    
+    /// right hand value for math operations
     var valueB = Number()
+    
+    /// current operator to use for math operation
     var currentOperator = Operator.none
+    
+    /// what value is currently being displayed
     var display = DisplayState.valueA
+    
+    /// current font size for the number display
+    var numberFontSize = 72
+    
+    /// closure to run on when equals is clicked
     var operatorClosure: (Number, Number) -> Number
+    
+    /// array of available math operators
     let operators: [(Number, Number) -> Number] = [
         add,
         subtract,
@@ -46,6 +66,8 @@ class CalculatorData {
         self.operatorClosure = operatorClosure
     }
     
+    ///
+    /// \brief reset the calculator
     func onClearClicked() {
         self.calculatedValue.reset()
         self.valueA.reset()
@@ -55,6 +77,8 @@ class CalculatorData {
         self.display = .valueA
     }
     
+    ///
+    /// \brief called when an operator is clicked on like +, -, /, *
     func onOperatorClicked(_ operate: Operator) {
         
         if operate == .plus || operate == .minus || operate == .multiply || operate == .divide {
@@ -97,6 +121,8 @@ class CalculatorData {
         }
     }
     
+    ///
+    /// \brief called when any of the numbers 0 - 9 are clicked
     func onNumberClicked(_ number: Int) {
         
         if display == .valueA {
@@ -107,6 +133,8 @@ class CalculatorData {
         }
     }
     
+    ///
+    /// \brief used to calculate the current display number
     func getDisplayValue() -> String {
         
         var displayValue: String
@@ -119,9 +147,23 @@ class CalculatorData {
         else {
             displayValue = calculatedValue.toString()
         }
+        
+        // update font size based on display length
+        if displayValue.count < 6 {
+            self.numberFontSize = kLargeFontSize
+        }
+        else if 6...10 ~= displayValue.count {
+            self.numberFontSize = kMeduimFontSize
+        }
+        else {
+            self.numberFontSize = kSmallFontSize
+        }
+        
         return displayValue
     }
     
+    ///
+    /// \brief calculate the final result, this is called by the equals operator
     func calculateFinalValue() {
         
         display = .calculatedValue
@@ -130,5 +172,9 @@ class CalculatorData {
             self.valueA.copy(number: self.calculatedValue)
             self.valueB.reset()
         }
+    }
+    
+    func getDisplayFontSize() -> CGFloat {
+        CGFloat(self.numberFontSize)
     }
 }

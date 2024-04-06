@@ -17,7 +17,7 @@ struct ContentView: View {
     var body: some View {
         VStack(alignment: .trailing) {
             Text(displayText)
-                .font(.system(size: 72))
+                .font(.system(size: self.data.getDisplayFontSize()))
                 .multilineTextAlignment(.trailing)
                 .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.2, alignment: .bottomTrailing)
                 .padding(5)
